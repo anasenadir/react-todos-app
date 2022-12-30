@@ -1,13 +1,14 @@
 import { useState } from "react";
 
 // import React from "react";
-const Form = ({addOrder , orderToUpdate}) => {
-    const [orderState ,setOrderState ] = useState({name: '' , product : '', quantity : 0});
+const Form = ({formOrderState ,setFormOrderState, listOrderesState , setListOrderState}) => {
+    // const [orderState ,setOrderState ] = useState({name: '' , product : '', quantity : 0});
 
     const submitHandler = (e)=>{
         e.preventDefault();
-        addOrder(orderState);
-        setOrderState({name: '' , product : '', quantity : 0});
+        console.log(formOrderState);
+        setListOrderState([ ...listOrderesState ,formOrderState]);
+        setFormOrderState({name: '' , product : '', quantity : 0});
     }
 
     // if(orderToUpdate){
@@ -15,16 +16,16 @@ const Form = ({addOrder , orderToUpdate}) => {
     //     console.log(orderToUpdate);
     // }
     return (
-        <form>
+        <form onSubmit={submitHandler}>
             <div style={{paddingBottom: 15}}>
                 <label htmlFor="">
-                    Customer Name : <input type="text" value={orderToUpdate.name} onChange={(e) => setOrderState({name: e.target.value , product : orderState.product, quantity : orderState.quantity})} /> 
+                    Customer Name : <input type="text" value={formOrderState.name} onChange={(e) => setFormOrderState({...formOrderState,name: e.target.value })} /> 
                 </label>
             </div>  
             <div style={{paddingBottom: 15}}>
                 <label htmlFor="">
 
-                    product : <select onChange={(e) => setOrderState({name: orderState.name , product : e.target.value, quantity : orderState.quantity})} >
+                    product : <select onChange={(e) => setFormOrderState({...formOrderState , product : e.target.value})} >
                         <option value='' >select a product</option>
                         <option value="product1">product1</option>
                         <option value="prodcut2">prodcut2</option>
@@ -35,11 +36,11 @@ const Form = ({addOrder , orderToUpdate}) => {
             </div>  
             <div style={{paddingBottom: 15}}>
                 <label htmlFor="">
-                    Quantity : <input type="number" value={orderState.quantity} min='0' setp='1' onChange={(e) => setOrderState({name: orderState.name , product : orderState.product , quantity : e.target.value})} /> 
+                    Quantity : <input type="number" value={formOrderState.quantity} min='0' setp='1' onChange={(e) => setFormOrderState({...formOrderState ,  quantity : e.target.value})} /> 
                 </label>
             </div>  
 
-            <button onClick={submitHandler}>submit</button>
+            <button>submit</button>
         </form>
     );
 

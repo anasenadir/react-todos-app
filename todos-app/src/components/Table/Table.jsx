@@ -1,7 +1,6 @@
 import "./Table.css";
 
-const Table = ({odrers , deleteOrder ,updateOrder})=>{
-
+const Table = ({listOrderesState , updateOrder , deleteOrder})=>{
     return (
         <table>
             <thead>
@@ -14,7 +13,7 @@ const Table = ({odrers , deleteOrder ,updateOrder})=>{
             </thead>
             <tbody>
                 {
-                    odrers.map((order , index)=>{
+                    listOrderesState.map((order , index)=>{
                         return (
                             <tr key={index}>
                                 <td>{order.name}</td>

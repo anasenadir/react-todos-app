@@ -4,12 +4,12 @@ import Table from "./Table/Table";
 
 const Index = () =>{
 
+    const [formOrderState ,setFormOrderState] = useState({name: '' , product : '', quantity : 0});
     const [listOrderesState , setListOrderState] = useState([]);
-    const [orderToUpdateState ,setOderToUpdateState] = useState({});
 
-    function addOrder(order){
-        setListOrderState([...listOrderesState , order]);
-    }
+    // function addOrder(order){
+    //     setListOrderState([...listOrderesState , order]);
+    // }
 
     function deleteOrder(indexParam)
     {
@@ -18,17 +18,32 @@ const Index = () =>{
 
     }
 
-    function getOrderToUpdate(indexParam)
-    {
-        let order = listOrderesState[indexParam];
-        setOderToUpdateState(order);
+
+    function updateOrder(index) {
+        let orderToUpdate = listOrderesState[index]
+        setFormOrderState(orderToUpdate);
     }
+
+    // function getOrderToUpdate(indexParam)
+    // {
+    //     let order = listOrderesState[indexParam];
+    //     setOderToUpdateState(order);
+    // }
 
     // console.log(orderToUpdateState)
   return (<div>
     <h1>App</h1>
-    <Form addOrder={addOrder} orderToUpdate={orderToUpdateState}/>
-    <Table odrers={listOrderesState} deleteOrder={deleteOrder} updateOrder={getOrderToUpdate}/>
+    <Form 
+    listOrderesState={listOrderesState} 
+    setListOrderState={setListOrderState} 
+    formOrderState={formOrderState}
+    setFormOrderState={setFormOrderState}/>
+
+
+    <Table 
+    listOrderesState={listOrderesState}
+    updateOrder={updateOrder} 
+    deleteOrder={deleteOrder}/>
   </div>
   );
 }
